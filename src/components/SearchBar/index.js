@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input } from 'semantic-ui-react';
 
-const SearchBar = () => {
+const SearchBar = ({ handleInputChange, handleSubmit }) => {
   return (
-    <Input
-      className='searchbar'
-      type='text'
-      icon='search'
-      placeholder='search'
-    />
+    <form onSubmit={handleSubmit} action=''>
+      <Input
+        className='searchbar'
+        type='text'
+        icon='search'
+        placeholder='search'
+        size='huge'
+        onChange={handleInputChange}
+      />
+    </form>
   );
 };
 

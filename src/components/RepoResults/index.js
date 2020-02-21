@@ -1,24 +1,32 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Dimmer, Loader, Grid, Card } from 'semantic-ui-react';
+import ReposStyled from './ReposStyled';
 
-const RepoResults = ({ repos }) => {
+const RepoResults = ({ repos, isFetching }) => {
   return (
     <>
-      {repos.map(repo => (
-        <div className='repo'>
-          <Card>
-            <Image src={repo.owner.avatar_url} wrapped ui={false} />
-            <Card.Content>
-              <Card.Header>
-                {repo.name}
-                {repo.owner.login}
-              </Card.Header>
-
-              <Card.Description>{repo.description}</Card.Description>
-            </Card.Content>
-          </Card>
-        </div>
-      ))}
+      {isFetching ? (
+        <Loader active>Loading...</Loader>
+      ) : (
+        <ReposStyled>
+          <Grid columns={3}>
+            <Grid.Row>
+              {repos.map(repo => (
+                <Grid.Column key={repo.owner.id}>
+                  <Card
+                    as='article'
+                    image={repo.owner.avatar_url}
+                    header={repo.name}
+                    meta={repo.owner.login}
+                    description={repo.description}
+                    centered
+                  />
+                </Grid.Column>
+              ))}
+            </Grid.Row>
+          </Grid>
+        </ReposStyled>
+      )}
     </>
   );
 };
