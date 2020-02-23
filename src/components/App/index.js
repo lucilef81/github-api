@@ -11,7 +11,7 @@ import RepoResults from '../RepoResults';
 // import Message from '../Message';
 import HeaderIcon from '../Header';
 import DarkModeToggle from '../DarkModeToggle';
-import NextPageButton from '../NextPageButton';
+import PageIndexButton from '../PageIndexButton';
 
 // == Composant
 const App = () => {
@@ -19,12 +19,13 @@ const App = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [searchValue, setSearchValue] = useState('javascript');
   const [darkMode, setDarkMode] = useState(false);
-  const [nextPage, setNextPage] = useState([]);
+  const [pageIndex, setPageIndex] = useState(1);
 
   const fetchRepos = async () => {
     setIsFetching(true);
+
     const response = await axios.get(
-      `https://api.github.com/search/repositories?q="${searchValue}"&client_id="7d00925637315010faa6"&client_secret="72659ba871c4569e0d2256441a2278e2ba7f11aa"&sort=stars&order=desc&page=1&per_page=9`
+      `https://api.github.com/search/repositories?q="${searchValue}"&client_id="7d00925637315010faa6"&client_secret="72659ba871c4569e0d2256441a2278e2ba7f11aa"&sort=stars&order=desc&page=${pageIndex}&per_page=9`
     );
     setRepos(response.data.items);
     setIsFetching(false);
@@ -32,13 +33,16 @@ const App = () => {
 
   useEffect(() => {
     fetchRepos();
-  }, [searchValue]);
+  }, [searchValue, pageIndex]);
 
   const handleInputChange = e => setSearchValue(e.currentTarget.value);
 
   const handleSubmit = () => {
     fetchRepos();
   };
+
+  const nextPage = () => setPageIndex(pageIndex + 1);
+  const previousPage = () => setPageIndex(pageIndex - 1);
 
   return (
     <div className='app'>
@@ -50,7 +54,8 @@ const App = () => {
         isDark={darkMode}
       />
       <RepoResults repos={repos} isFetching={isFetching} />
-      <NextPageButton nextPage={nextPage} />
+      <PageIndexButton setPageIndex={previousPage} label='Previous' />
+      <PageIndexButton setPageIndex={nextPage} label='Next' isNext />
     </div>
   );
 };

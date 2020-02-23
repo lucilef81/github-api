@@ -15,6 +15,7 @@ const ReposStyled = styled.div`
 
   .ui.card > .content {
     height: 10rem;
+    overflow: hidden;
   }
 `;
 
