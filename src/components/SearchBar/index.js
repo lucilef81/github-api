@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Input } from 'semantic-ui-react';
 
-const SearchBar = ({ handleInputChange, handleSubmit }) => {
+const SearchBar = ({ handleInputChange, handleSubmit, isDark }) => {
   return (
     <form onSubmit={handleSubmit} action=''>
       <Input
