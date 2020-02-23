@@ -3,7 +3,7 @@ import { Button, Icon } from 'semantic-ui-react';
 
 const PageIndexButton = ({ setPageIndex, label, isNext }) => (
   <Button
-    color='purple'
+    color='teal'
     icon
     onClick={setPageIndex}
     labelPosition={isNext ? 'right' : 'left'}
