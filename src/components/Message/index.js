@@ -1,7 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-const Message = props => {
+const Message = () => {
   return <div>test</div>;
 };
 

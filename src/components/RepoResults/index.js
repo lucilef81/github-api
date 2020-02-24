@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dimmer, Loader, Grid, Card } from 'semantic-ui-react';
+import { Loader, Grid, Card } from 'semantic-ui-react';
 import ReposStyled from './ReposStyled';
 
 const RepoResults = ({ repos, isFetching }) => {

@@ -25,7 +25,7 @@ const App = () => {
     setIsFetching(true);
 
     const response = await axios.get(
-      `https://api.github.com/search/repositories?q="${searchValue}"&client_id="7d00925637315010faa6"&client_secret="72659ba871c4569e0d2256441a2278e2ba7f11aa"&sort=stars&order=desc&page=${pageIndex}&per_page=9`
+      `https://api.github.com/search/repositories?q='${searchValue}'&client_id="7d00925637315010faa6"&client_secret="72659ba871c4569e0d2256441a2278e2ba7f11aa"&sort=stars&order=desc&page=${pageIndex}&per_page=9`
     );
     setRepos(response.data.items);
     setIsFetching(false);
@@ -46,8 +46,9 @@ const App = () => {
 
   return (
     <div className='app'>
-      <HeaderIcon isDark={darkMode} />
       <DarkModeToggle darkMode={darkMode} setDarkMode={setDarkMode} />
+      <HeaderIcon isDark={darkMode} />
+
       <SearchBar
         handleInputChange={handleInputChange}
         handleSubmit={handleSubmit}
@@ -60,8 +61,5 @@ const App = () => {
   );
 };
 
-App.propTypes = {
-  id: PropTypes.number,
-};
 // == Export
 export default App;
